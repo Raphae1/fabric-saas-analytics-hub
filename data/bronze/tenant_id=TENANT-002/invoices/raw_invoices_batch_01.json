@@ -1,0 +1,28 @@
+{
+    "TenantID": "TENANT-002",
+    "IngestionTimestamp": "2026-11-02T23:56:03.597228Z",
+    "Invoices": [
+        {
+            "InvoiceID": "INV-2001",
+            "Contact": {
+                "ContactID": "CUST-201",
+                "Name": "Beta Corp"
+            },
+            "Date": "2026-11-02",
+            "DueDate": "2026-12-02",
+            "Total": 4800.0,
+            "Status": "PAID"
+        },
+        {
+            "InvoiceID": "INV-2002",
+            "Contact": {
+                "ContactID": "CUST-202",
+                "Name": "Gamma Inc"
+            },
+            "Date": "2026-11-03",
+            "DueDate": "2026-12-03",
+            "Total": 1550.25,
+            "Status": "AUTHORISED"
+        }
+    ]
+}

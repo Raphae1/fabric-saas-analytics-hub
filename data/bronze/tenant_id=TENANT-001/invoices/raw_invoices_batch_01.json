@@ -1,0 +1,17 @@
+{
+    "TenantID": "TENANT-001",
+    "IngestionTimestamp": "2026-11-02T23:56:03.595885Z",
+    "Invoices": [
+        {
+            "InvoiceID": "INV-1001",
+            "Contact": {
+                "ContactID": "CUST-101",
+                "Name": "Alpha LLC"
+            },
+            "Date": "2026-11-01",
+            "DueDate": "2026-12-01",
+            "Total": 1250.0,
+            "Status": "AUTHORISED"
+        }
+    ]
+}

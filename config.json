@@ -1,12 +1,15 @@
 {
-  "api": {
-    "token_endpoint": "https://identity.getxero.com/connect/token",
-    "api_base_url": "https://api.xero.com/api.x.2/Invoices",
-    "client_id": "YOUR_CLIENT_ID",
-    "client_secret": "YOUR_CLIENT_SECRET",
-    "tenant_id": "YOUR_TENANT_ID"
-  },
-  "storage": {
-    "bronze_output_dir": "./data/bronze/invoices"
-  }
+  "environment": "development",
+  "authorized_tenants": [
+    {
+      "tenant_id": "TENANT-001",
+      "tenant_name": "Acme Corp",
+      "api_endpoint": "https://api.mocksaas.com/v1/acme/invoices"
+    },
+    {
+      "tenant_id": "TENANT-002",
+      "tenant_name": "Globex Corp",
+      "api_endpoint": "https://api.mocksaas.com/v1/globex/invoices"
+    }
+  ]
 }
