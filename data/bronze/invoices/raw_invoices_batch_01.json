@@ -1,0 +1,24 @@
+{
+    "Invoices": [
+        {
+            "InvoiceID": "INV-001",
+            "Contact": {
+                "ContactID": "CUST-101"
+            },
+            "Date": "2026-11-01",
+            "DueDate": "2026-12-01",
+            "Total": 1250.0,
+            "Status": "AUTHORISED"
+        },
+        {
+            "InvoiceID": "INV-002",
+            "Contact": {
+                "ContactID": "CUST-102"
+            },
+            "Date": "2026-11-02",
+            "DueDate": "2026-12-02",
+            "Total": 3400.5,
+            "Status": "PAID"
+        }
+    ]
+}

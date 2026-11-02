@@ -1,0 +1,12 @@
+{
+  "api": {
+    "token_endpoint": "https://identity.getxero.com/connect/token",
+    "api_base_url": "https://api.xero.com/api.x.2/Invoices",
+    "client_id": "YOUR_CLIENT_ID",
+    "client_secret": "YOUR_CLIENT_SECRET",
+    "tenant_id": "YOUR_TENANT_ID"
+  },
+  "storage": {
+    "bronze_output_dir": "./data/bronze/invoices"
+  }
+}
