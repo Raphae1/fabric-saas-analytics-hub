@@ -21,19 +21,13 @@ def test_silver_multi_tenant_transformations():
     assert silver_file.exists(), "Silver parquet dataset is missing."
     
     df = pd.read_parquet(silver_file)
-    
-    # Check mandatory columns including tenant_id
     expected_columns = {"tenant_id", "invoice_id", "contact_id", "invoice_date", "due_date", "total_amount", "status"}
     assert expected_columns.issubset(df.columns), f"Missing columns in Silver table. Found: {df.columns.tolist()}"
     
-    # Check null primary keys & tenant boundaries
     assert df["invoice_id"].isnull().sum() == 0, "Found null invoice IDs in Silver table."
     assert df["tenant_id"].isnull().sum() == 0, "Found null tenant IDs in Silver table."
-    
-    # Check tenant-scoped uniqueness
     assert df.duplicated(subset=["tenant_id", "invoice_id"]).sum() == 0, "Duplicate tenant-invoice IDs detected."
     
-    # Verify both tenants are present in the dataset
     unique_tenants = df["tenant_id"].unique()
     assert "TENANT-001" in unique_tenants, "TENANT-001 missing from Silver dataset."
     assert "TENANT-002" in unique_tenants, "TENANT-002 missing from Silver dataset."
@@ -53,3 +47,21 @@ def test_gold_multi_tenant_aggregations():
     df_monthly = pd.read_parquet(monthly_revenue_file)
     assert "tenant_id" in df_monthly.columns, "tenant_id missing from monthly revenue summary."
     assert (df_monthly["revenue"] >= 0).all(), "Negative revenue detected in monthly summary."
+
+def test_gold_security_mapping():
+    """Verify RLS security mapping table exists and maps users correctly to tenants."""
+    mapping_file = Path("./data/gold/analytics/dim_user_tenants.parquet")
+    assert mapping_file.exists(), "Security mapping table dim_user_tenants.parquet is missing."
+    
+    df_mapping = pd.read_parquet(mapping_file)
+    expected_columns = {"user_email", "tenant_id", "access_role", "tenant_name"}
+    assert expected_columns.issubset(df_mapping.columns), f"Missing columns in security mapping. Found: {df_mapping.columns.tolist()}"
+    
+    # Ensure no nulls in security mapping
+    assert df_mapping["user_email"].isnull().sum() == 0, "Null user emails found in security mapping."
+    assert df_mapping["tenant_id"].isnull().sum() == 0, "Null tenant IDs found in security mapping."
+    
+    # Ensure our target test tenants are covered
+    mapped_tenants = df_mapping["tenant_id"].unique()
+    assert "TENANT-001" in mapped_tenants, "TENANT-001 missing from security mapping table."
+    assert "TENANT-002" in mapped_tenants, "TENANT-002 missing from security mapping table."

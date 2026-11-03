@@ -36,13 +36,14 @@ def run_step(script_name):
         return False
 
 def main():
-    logging.info("Starting Multi-Tenant End-to-End Medallion Pipeline Orchestration...")
+    logging.info("Starting Multi-Tenant End-to-End Medallion Pipeline & Governance Orchestration...")
     pipeline_start = time.time()
 
     steps = [
-        "ingest.py",             # Bronze Layer: Multi-tenant ingestion from config boundary
-        "transform.py",          # Silver Layer: Tenant-partitioned Parquet transformation & security checks
-        "gold_aggregations.py"   # Gold Layer: Tenant-scoped financial & customer summaries
+        "ingest.py",                    # Bronze Layer: Multi-tenant ingestion from config boundary
+        "transform.py",                 # Silver Layer: Tenant-partitioned Parquet transformation & security checks
+        "gold_aggregations.py",         # Gold Layer: Tenant-scoped financial & customer summaries
+        "generate_security_mapping.py"  # Security Governance: Tenant-to-user RLS mapping table
     ]
 
     for step in steps:
@@ -52,7 +53,7 @@ def main():
             sys.exit(1)
 
     total_duration = time.time() - pipeline_start
-    logging.info(f"?? Multi-Tenant Pipeline Execution Successful! Total Duration: {total_duration:.2f}s")
+    logging.info(f"?? Multi-Tenant Pipeline & Governance Orchestration Successful! Total Duration: {total_duration:.2f}s")
 
 if __name__ == "__main__":
     main()
