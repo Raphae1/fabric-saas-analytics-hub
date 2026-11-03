@@ -1,15 +1,14 @@
 {
-  "environment": "development",
-  "authorized_tenants": [
+  "AuthorizedTenants": [
     {
-      "tenant_id": "TENANT-001",
-      "tenant_name": "Acme Corp",
-      "api_endpoint": "https://api.mocksaas.com/v1/acme/invoices"
+      "TenantID": "TENANT-001",
+      "TenantName": "Acme Corp",
+      "ApiKey": "key-token-abc123-001"
     },
     {
-      "tenant_id": "TENANT-002",
-      "tenant_name": "Globex Corp",
-      "api_endpoint": "https://api.mocksaas.com/v1/globex/invoices"
+      "TenantID": "TENANT-002",
+      "TenantName": "Globex Inc",
+      "ApiKey": "key-token-xyz789-002"
     }
   ]
 }
